@@ -14,6 +14,7 @@
 		5F405E711B4430E100D3176B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5F405E701B4430E100D3176B /* Images.xcassets */; };
 		5F405E741B4430E100D3176B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F405E721B4430E100D3176B /* LaunchScreen.xib */; };
 		5F405E801B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F405E7F1B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.m */; };
+		5F405E8B1B44341300D3176B /* KYAsyncLoadBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		5F405E791B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KYAsyncLoadBubbleDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F405E7E1B4430E100D3176B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5F405E7F1B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYAsyncLoadBubbleDemoTests.m; sourceTree = "<group>"; };
+		5F405E891B44341300D3176B /* KYAsyncLoadBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KYAsyncLoadBubble.h; path = ../../Classes/KYAsyncLoadBubble.h; sourceTree = "<group>"; };
+		5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KYAsyncLoadBubble.m; path = ../../Classes/KYAsyncLoadBubble.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,7 @@
 				5F405E681B4430E100D3176B /* AppDelegate.m */,
 				5F405E6A1B4430E100D3176B /* ViewController.h */,
 				5F405E6B1B4430E100D3176B /* ViewController.m */,
+				5F405E8C1B44341C00D3176B /* KYAsyncLoadBubble */,
 				5F405E6D1B4430E100D3176B /* Main.storyboard */,
 				5F405E701B4430E100D3176B /* Images.xcassets */,
 				5F405E721B4430E100D3176B /* LaunchScreen.xib */,
@@ -117,6 +121,15 @@
 				5F405E7E1B4430E100D3176B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5F405E8C1B44341C00D3176B /* KYAsyncLoadBubble */ = {
+			isa = PBXGroup;
+			children = (
+				5F405E891B44341300D3176B /* KYAsyncLoadBubble.h */,
+				5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */,
+			);
+			name = KYAsyncLoadBubble;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5F405E8B1B44341300D3176B /* KYAsyncLoadBubble.m in Sources */,
 				5F405E6C1B4430E100D3176B /* ViewController.m in Sources */,
 				5F405E691B4430E100D3176B /* AppDelegate.m in Sources */,
 				5F405E661B4430E100D3176B /* main.m in Sources */,
@@ -350,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KYAsyncLoadBubbleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -360,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = KYAsyncLoadBubbleDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -418,6 +434,7 @@
 				5F405E851B4430E100D3176B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5F405E861B4430E100D3176B /* Build configuration list for PBXNativeTarget "KYAsyncLoadBubbleDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +443,7 @@
 				5F405E881B4430E100D3176B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

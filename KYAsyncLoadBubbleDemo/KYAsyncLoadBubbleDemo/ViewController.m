@@ -7,6 +7,8 @@
 //
 
 #import "ViewController.h"
+#import "KYAsyncLoadBubble.h"
+
 
 @interface ViewController ()
 
@@ -16,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    KYAsyncLoadBubble *bubble = [KYAsyncLoadBubble new];
+    [self.view addSubview:bubble];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
