@@ -13,6 +13,12 @@
 
 #import "KYAsyncLoadBubble.h"
 
+@interface KYAsyncLoadBubble()
+
+@property(nonatomic,weak)UIView *spView;
+
+@end
+
 @implementation KYAsyncLoadBubble
 
 
@@ -42,7 +48,8 @@
 #pragma mark -- OVERRIDE METHOD
 -(void)willMoveToSuperview:(UIView *)newSuperview{
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragBubble:)];
-    [newSuperview addGestureRecognizer:pan];
+    self.spView = newSuperview;
+    [self addGestureRecognizer:pan];
     
 }
 
@@ -51,8 +58,7 @@
 
 -(void)dragBubble:(UIPanGestureRecognizer *)panGes{
     
-    UIView *superView = panGes.view;
-    CGPoint currentPoint = [panGes locationInView:superView];
+    CGPoint currentPoint = [panGes locationInView:self.spView];
     CGPoint destinationPoint;
     
     
