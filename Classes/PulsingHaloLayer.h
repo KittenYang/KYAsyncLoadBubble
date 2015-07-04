@@ -64,6 +64,8 @@
 @property (nonatomic,assign) BOOL touchEnded;
 
 - (id)initWithRepeatCount:(float)repeatCount;
+
+//added by ky
 -(void)stopPulse;
 
 @end

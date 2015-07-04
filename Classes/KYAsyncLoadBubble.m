@@ -12,6 +12,7 @@
 
 
 #import "KYAsyncLoadBubble.h"
+#import "WaveLayer.h"
 #import "MultiplePulsingHaloLayer.h"
 
 @interface KYAsyncLoadBubble()
@@ -24,6 +25,8 @@
     
     UIView *closeArea;
     MultiplePulsingHaloLayer *pulseLayer;
+    WaveLayer *waveLayer;
+    UILabel *bubbleLabel;
 }
 
 
@@ -32,21 +35,52 @@
     self = [super init];
     if (self){
         
+        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.layer.shadowOpacity = 0.5f;
+        self.layer.shadowRadius = 3.0f;
+        self.layer.shadowOffset = CGSizeMake(0, -4);
     }
     return self;
     
 }
 
 
-
 #pragma mark -- PUBLIC METHOD
+-(void)setProgress:(CGFloat)progress{
+    
+    NSLog(@"progress:%f",progress);
+    waveLayer.progress = 1.0 - progress;
+    bubbleLabel.center = CGPointMake(RADIUS/2,RADIUS/4 + progress * (RADIUS/4));
+    if (progress >= 0.73f && progress != 1.0f) {
+        bubbleLabel.text = @"即将完成";
+        bubbleLabel.font = [UIFont systemFontOfSize:10.0f];
+        bubbleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        bubbleLabel.textColor = [UIColor whiteColor];
+        [self bringSubviewToFront:bubbleLabel];
+    }else if (progress == 1.0f){
+        bubbleLabel.text = @"完成";
+        bubbleLabel.font = [UIFont systemFontOfSize:13.0f];
+        bubbleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        bubbleLabel.textColor = [UIColor whiteColor];
+        [self bringSubviewToFront:bubbleLabel];
+        
+    }else{
 
+        bubbleLabel.text = self.bubbleText;
+        bubbleLabel.font = [UIFont systemFontOfSize:13.0f];
+        bubbleLabel.textColor = self.bubbleColor;
+
+    }
+    
+}
 
 #pragma mark -- OVERRIDE METHOD
 -(void)willMoveToSuperview:(UIView *)newSuperview{
     
-    self.backgroundColor = self.bubbleColor;
+    //jump from bottom
+    self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = RADIUS/2;
+    self.layer.masksToBounds = YES;
     self.center = CGPointMake(SCREENWIDTH/2, SCREENHEIGHT + RADIUS);
     [UIView animateWithDuration:0.6 delay:1.0 usingSpringWithDamping:0.6f initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
 
@@ -55,6 +89,33 @@
     } completion:^(BOOL finished) {
         
     }];
+    
+    //label
+    if (bubbleLabel == nil) {
+        bubbleLabel= [[UILabel alloc]init];
+        bubbleLabel.bounds = CGRectMake(0, 0, RADIUS, RADIUS/2);
+        bubbleLabel.center = CGPointMake(RADIUS/2, RADIUS/4);
+        
+        bubbleLabel.text = self.bubbleText;
+        bubbleLabel.textAlignment = NSTextAlignmentCenter;
+        bubbleLabel.font = [UIFont systemFontOfSize:13.0f];
+        bubbleLabel.textColor = self.bubbleColor;
+        [self addSubview:bubbleLabel];
+    }
+    
+    
+    //start wave
+    if (waveLayer == nil) {
+        waveLayer = [WaveLayer layer];
+        waveLayer.frame = self.bounds;
+        waveLayer.waveSpeed = 10.0f;
+        waveLayer.waveAmplitude = 1.0f;
+        waveLayer.fillColor = self.bubbleColor.CGColor;
+        [waveLayer wave];
+        [self.layer addSublayer:waveLayer];
+    }
+
+    
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragBubble:)];
     self.spView = newSuperview;
@@ -161,6 +222,8 @@
     
 }
 
+
+#pragma mark -- Helper Method
 
 //判断属于哪一个象限
 -(NSInteger)pointBelongsWhichPart:(CGPoint)point{

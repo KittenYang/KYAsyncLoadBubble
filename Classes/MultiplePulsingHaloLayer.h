@@ -81,6 +81,8 @@
  *	properties like @c haloLayerNumber when the animation is running, you have to create a new instance.
  */
 - (void)buildSublayers;
+
+//added by ky
 - (void)stopPulse;
 
 @end
