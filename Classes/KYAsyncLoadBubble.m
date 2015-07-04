@@ -12,7 +12,7 @@
 
 
 #import "KYAsyncLoadBubble.h"
-#import "PulsingHaloLayer.h"
+#import "MultiplePulsingHaloLayer.h"
 
 @interface KYAsyncLoadBubble()
 
@@ -23,7 +23,7 @@
 @implementation KYAsyncLoadBubble{
     
     UIView *closeArea;
-    PulsingHaloLayer *pulseLayer;
+    MultiplePulsingHaloLayer *pulseLayer;
 }
 
 
@@ -31,8 +31,6 @@
 
     self = [super init];
     if (self){
-
-        [self initialize];
         
     }
     return self;
@@ -42,11 +40,6 @@
 
 
 #pragma mark -- PUBLIC METHOD
-
--(void)initialize{
-//    self.frame = CGRectMake(SCREENWIDTH-RADIUS, 100, RADIUS, RADIUS);
-
-}
 
 
 #pragma mark -- OVERRIDE METHOD
@@ -78,7 +71,6 @@
     
     CGPoint destinationPoint;
     
-    
     if (panGes.state == UIGestureRecognizerStateBegan) {
 
         if (closeArea == nil) {
@@ -108,11 +100,13 @@
             } completion:^(BOOL finished) {
                 
                 if (pulseLayer == nil && closeArea != nil) {
-                    pulseLayer = [PulsingHaloLayer layer];
+                    pulseLayer = [[MultiplePulsingHaloLayer alloc] initWithHaloLayerNum:3 andStartInterval:1];
                     pulseLayer.position = closeArea.center;
+                    pulseLayer.useTimingFunction = NO;
                     pulseLayer.animationDuration = 2.0f;
+                    [pulseLayer buildSublayers];
                     pulseLayer.fromValueForRadius = 0.3;
-                    pulseLayer.backgroundColor = self.bubbleColor.CGColor;
+                    pulseLayer.haloLayerColor = self.bubbleColor.CGColor;
                     [self.spView.layer insertSublayer:pulseLayer below:closeArea.layer];
                 }
                 
@@ -124,7 +118,23 @@
     }else if (panGes.state == UIGestureRecognizerStateChanged){
 
         self.center = currentPoint;
+        
+        if (CGRectContainsPoint(closeArea.frame,currentPoint)) {
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                closeArea.transform = CGAffineTransformMakeScale(1.5, 1.5);
+            } completion:^(BOOL finished) {
                 
+            }];
+            
+        }else{
+            [UIView animateWithDuration:0.3 animations:^{
+                closeArea.transform = CGAffineTransformIdentity;
+            } completion:^(BOOL finished) {
+                
+            }];
+        }
+        
     }else if (panGes.state == UIGestureRecognizerStateEnded || panGes.state == UIGestureRecognizerStateCancelled){
         
         [pulseLayer stopPulse];
@@ -150,6 +160,7 @@
 
     
 }
+
 
 //判断属于哪一个象限
 -(NSInteger)pointBelongsWhichPart:(CGPoint)point{
@@ -180,6 +191,17 @@
     return destinationPoint;
 }
 
+
+//Point是否在CGRect内
+-(BOOL)ifInsideWithPoint:(CGPoint)point withRect:(CGRect)rect{
+    
+    if ((point.x >= rect.origin.x && point.x <= rect.origin.x+rect.size.width) && (point.y >= rect.origin.y && point.y <= rect.origin.y + rect.size.height)) {
+        return YES;
+    }else{
+        return NO;
+    }
+    
+}
 
 
 @end
