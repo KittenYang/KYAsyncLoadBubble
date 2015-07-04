@@ -15,6 +15,8 @@
 		5F405E741B4430E100D3176B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5F405E721B4430E100D3176B /* LaunchScreen.xib */; };
 		5F405E801B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F405E7F1B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.m */; };
 		5F405E8B1B44341300D3176B /* KYAsyncLoadBubble.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */; };
+		5FB874111B47EF74008A3940 /* WaveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874101B47EF74008A3940 /* WaveLayer.m */; };
+		5FB874181B480812008A3940 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874171B480812008A3940 /* PulsingHaloLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +45,10 @@
 		5F405E7F1B4430E100D3176B /* KYAsyncLoadBubbleDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KYAsyncLoadBubbleDemoTests.m; sourceTree = "<group>"; };
 		5F405E891B44341300D3176B /* KYAsyncLoadBubble.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KYAsyncLoadBubble.h; path = ../../Classes/KYAsyncLoadBubble.h; sourceTree = "<group>"; };
 		5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KYAsyncLoadBubble.m; path = ../../Classes/KYAsyncLoadBubble.m; sourceTree = "<group>"; };
+		5FB8740F1B47EF74008A3940 /* WaveLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaveLayer.h; path = ../../Classes/WaveLayer.h; sourceTree = "<group>"; };
+		5FB874101B47EF74008A3940 /* WaveLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WaveLayer.m; path = ../../Classes/WaveLayer.m; sourceTree = "<group>"; };
+		5FB874161B480812008A3940 /* PulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PulsingHaloLayer.h; path = ../../Classes/PulsingHaloLayer.h; sourceTree = "<group>"; };
+		5FB874171B480812008A3940 /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PulsingHaloLayer.m; path = ../../Classes/PulsingHaloLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,8 +134,28 @@
 			children = (
 				5F405E891B44341300D3176B /* KYAsyncLoadBubble.h */,
 				5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */,
+				5FB874191B48082A008A3940 /* PulseLayer */,
+				5FB874121B47EF7B008A3940 /* WaveLayer */,
 			);
 			name = KYAsyncLoadBubble;
+			sourceTree = "<group>";
+		};
+		5FB874121B47EF7B008A3940 /* WaveLayer */ = {
+			isa = PBXGroup;
+			children = (
+				5FB8740F1B47EF74008A3940 /* WaveLayer.h */,
+				5FB874101B47EF74008A3940 /* WaveLayer.m */,
+			);
+			name = WaveLayer;
+			sourceTree = "<group>";
+		};
+		5FB874191B48082A008A3940 /* PulseLayer */ = {
+			isa = PBXGroup;
+			children = (
+				5FB874161B480812008A3940 /* PulsingHaloLayer.h */,
+				5FB874171B480812008A3940 /* PulsingHaloLayer.m */,
+			);
+			name = PulseLayer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +262,8 @@
 				5F405E6C1B4430E100D3176B /* ViewController.m in Sources */,
 				5F405E691B4430E100D3176B /* AppDelegate.m in Sources */,
 				5F405E661B4430E100D3176B /* main.m in Sources */,
+				5FB874181B480812008A3940 /* PulsingHaloLayer.m in Sources */,
+				5FB874111B47EF74008A3940 /* WaveLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

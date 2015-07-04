@@ -20,6 +20,7 @@
     [super viewDidLoad];
     
     KYAsyncLoadBubble *bubble = [KYAsyncLoadBubble new];
+    bubble.bubbleColor = [UIColor colorWithRed:0.0 green:0.487 blue:1.0 alpha:1.0];
     [self.view addSubview:bubble];
     
     

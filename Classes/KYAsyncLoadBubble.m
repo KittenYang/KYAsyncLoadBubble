@@ -12,6 +12,7 @@
 
 
 #import "KYAsyncLoadBubble.h"
+#import "PulsingHaloLayer.h"
 
 @interface KYAsyncLoadBubble()
 
@@ -19,12 +20,14 @@
 
 @end
 
-@implementation KYAsyncLoadBubble
+@implementation KYAsyncLoadBubble{
+    
+    UIView *closeArea;
+    PulsingHaloLayer *pulseLayer;
+}
 
 
 -(id)init{
-
-
 
     self = [super init];
     if (self){
@@ -36,17 +39,30 @@
     
 }
 
+
+
 #pragma mark -- PUBLIC METHOD
+
 -(void)initialize{
-    self.frame = CGRectMake(SCREENWIDTH-RADIUS, 100, RADIUS, RADIUS);
-    self.backgroundColor = [UIColor redColor];
-    self.layer.cornerRadius = RADIUS/2;
+//    self.frame = CGRectMake(SCREENWIDTH-RADIUS, 100, RADIUS, RADIUS);
 
 }
 
 
 #pragma mark -- OVERRIDE METHOD
 -(void)willMoveToSuperview:(UIView *)newSuperview{
+    
+    self.backgroundColor = self.bubbleColor;
+    self.layer.cornerRadius = RADIUS/2;
+    self.center = CGPointMake(SCREENWIDTH/2, SCREENHEIGHT + RADIUS);
+    [UIView animateWithDuration:0.6 delay:1.0 usingSpringWithDamping:0.6f initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+
+        self.frame = CGRectMake(SCREENWIDTH-RADIUS, 100, RADIUS, RADIUS);
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+    
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragBubble:)];
     self.spView = newSuperview;
     [self addGestureRecognizer:pan];
@@ -59,18 +75,70 @@
 -(void)dragBubble:(UIPanGestureRecognizer *)panGes{
     
     CGPoint currentPoint = [panGes locationInView:self.spView];
+    
     CGPoint destinationPoint;
     
     
     if (panGes.state == UIGestureRecognizerStateBegan) {
+
+        if (closeArea == nil) {
+            closeArea = [[UIView alloc]init];
+            closeArea.center = CGPointMake(SCREENWIDTH/2, SCREENHEIGHT-RADIUS/2);
+            closeArea.bounds = CGRectMake(0, 0, RADIUS, RADIUS);
+            closeArea.layer.cornerRadius = RADIUS/2;
+            closeArea.backgroundColor = self.bubbleColor;
+            
+            
+            UILabel *closeText = [[UILabel alloc]initWithFrame:closeArea.bounds];
+            closeText.font = [UIFont systemFontOfSize:16.0f];
+            closeText.textColor = [UIColor whiteColor];
+            closeText.textAlignment = NSTextAlignmentCenter;
+            closeText.text = @"关闭";
+            
+            [closeArea addSubview:closeText];
+            [self.spView addSubview:closeArea];
+            
+            
+            closeArea.transform = CGAffineTransformScale(closeText.transform, 0.2, 0.2);
+            
+            [UIView animateWithDuration:0.6 delay:0.0 usingSpringWithDamping:0.6f initialSpringVelocity:0.0f options:UIViewAnimationOptionCurveEaseOut animations:^{
+
+                closeArea.transform = CGAffineTransformIdentity;
+                
+            } completion:^(BOOL finished) {
+                
+                if (pulseLayer == nil && closeArea != nil) {
+                    pulseLayer = [PulsingHaloLayer layer];
+                    pulseLayer.position = closeArea.center;
+                    pulseLayer.animationDuration = 2.0f;
+                    pulseLayer.fromValueForRadius = 0.3;
+                    pulseLayer.backgroundColor = self.bubbleColor.CGColor;
+                    [self.spView.layer insertSublayer:pulseLayer below:closeArea.layer];
+                }
+                
+            }];
+        
+        }
+        
         
     }else if (panGes.state == UIGestureRecognizerStateChanged){
 
         self.center = currentPoint;
-        
+                
     }else if (panGes.state == UIGestureRecognizerStateEnded || panGes.state == UIGestureRecognizerStateCancelled){
         
+        [pulseLayer stopPulse];
+        pulseLayer  = nil;
+
         destinationPoint = [self destinationPoint:currentPoint];
+        [UIView animateWithDuration:0.2 animations:^{
+
+            closeArea.transform = CGAffineTransformMakeScale(0.1, 0.1);
+            
+        } completion:^(BOOL finished) {
+            [closeArea removeFromSuperview];
+            closeArea = nil;
+        }];
         
         [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
             
@@ -83,6 +151,7 @@
     
 }
 
+//判断属于哪一个象限
 -(NSInteger)pointBelongsWhichPart:(CGPoint)point{
     
     if (point.x <= SCREENWIDTH/2) {
@@ -102,6 +171,7 @@
 }
 
 
+//通过起始坐标判断终点坐标
 -(CGPoint)destinationPoint:(CGPoint)initialPoint{
     CGPoint destinationPoint;
     destinationPoint.x = initialPoint.x >= SCREENWIDTH/2 ? SCREENWIDTH-RADIUS/2 : RADIUS/2;
@@ -109,6 +179,7 @@
     
     return destinationPoint;
 }
+
 
 
 @end
