@@ -50,10 +50,9 @@
     _bubble.progress = 0.0;
     _bubble.bubbleText = @"网页";
     _bubble.delegate = self;
+    _bubble.webUrl = @"http://blog.sunnyxx.com/2015/07/04/ios-interview/";
     [self.view addSubview:_bubble];
-    
-    //异步请求网页内容
-    AFURLConnectionOperation *connectionOP = [AFURLConnectionOperation alloc]initWithRequest:<#(NSURLRequest *)#>
+        
 }
 
 
@@ -63,10 +62,12 @@
 }
 
 #pragma mark -- TapBubbleDelegate
--(void)bubbleDidTapped{
-//    WebViewController *webVc = [[WebViewController alloc]initWithURL:@"https://www.baidu.com/"];
-//    [self.navigationController pushViewController:webVc animated:YES];
+-(void)bubbleDidTapped:(NSString *)webContent{
+    WebViewController *webVc = [[WebViewController alloc]initWithURL:_bubble.webUrl];
+    webVc.webContent = webContent;
+    [self.navigationController pushViewController:webVc animated:YES];
 }
+
 
 
 #pragma mark -- UINavigationControllerDelegate

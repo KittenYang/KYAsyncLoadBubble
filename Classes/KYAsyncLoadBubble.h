@@ -13,7 +13,7 @@
 /**
  *  bubble tapped protocol method
  */
--(void)bubbleDidTapped;
+-(void)bubbleDidTapped:(NSString *)webContent;
 
 @end
 
@@ -38,8 +38,15 @@
 
 
 /**
+ *  The url of target web page 网页地址
+ */
+@property (nonatomic,strong)NSString *webUrl;
+
+
+/**
  *  Delegate
  */
 @property (nonatomic,weak)id <TapBubbleDelegate> delegate;
+
 
 @end

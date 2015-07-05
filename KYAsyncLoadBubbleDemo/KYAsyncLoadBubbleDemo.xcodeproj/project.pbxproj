@@ -23,7 +23,6 @@
 		5FB874261B4921AB008A3940 /* KYBubbleInteractiveTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874231B4921AB008A3940 /* KYBubbleInteractiveTransition.m */; };
 		5FB874271B4921AB008A3940 /* KYBubbleTransition.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874251B4921AB008A3940 /* KYBubbleTransition.m */; };
 		5FB8742A1B49279B008A3940 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874291B49279B008A3940 /* WebViewController.m */; };
-		5FB8742D1B494677008A3940 /* HttpHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8742C1B494677008A3940 /* HttpHelper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,8 +65,6 @@
 		5FB874251B4921AB008A3940 /* KYBubbleTransition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KYBubbleTransition.m; sourceTree = "<group>"; };
 		5FB874281B49279B008A3940 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		5FB874291B49279B008A3940 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		5FB8742B1B494677008A3940 /* HttpHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpHelper.h; path = ../../Classes/HttpHelper.h; sourceTree = "<group>"; };
-		5FB8742C1B494677008A3940 /* HttpHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpHelper.m; path = ../../Classes/HttpHelper.m; sourceTree = "<group>"; };
 		A68C820F01D2EEEDB875D8A8 /* Pods-KYAsyncLoadBubbleDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYAsyncLoadBubbleDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KYAsyncLoadBubbleDemo/Pods-KYAsyncLoadBubbleDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		AF0021C84C2004B3DEE54991 /* libPods-KYAsyncLoadBubbleDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KYAsyncLoadBubbleDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E35FCCFD0AE51713A09BB8FD /* Pods-KYAsyncLoadBubbleDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KYAsyncLoadBubbleDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-KYAsyncLoadBubbleDemo/Pods-KYAsyncLoadBubbleDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -173,7 +170,6 @@
 				5FB874191B48082A008A3940 /* PulseLayer */,
 				5FB874121B47EF7B008A3940 /* WaveLayer */,
 				5FB874201B48F7FC008A3940 /* FireworksView */,
-				5FB8742E1B494682008A3940 /* HttpHelper */,
 			);
 			name = KYAsyncLoadBubble;
 			sourceTree = "<group>";
@@ -217,15 +213,6 @@
 			);
 			name = KYBubbleTransition;
 			path = ../../Classes/KYBubbleTransition;
-			sourceTree = "<group>";
-		};
-		5FB8742E1B494682008A3940 /* HttpHelper */ = {
-			isa = PBXGroup;
-			children = (
-				5FB8742B1B494677008A3940 /* HttpHelper.h */,
-				5FB8742C1B494677008A3940 /* HttpHelper.m */,
-			);
-			name = HttpHelper;
 			sourceTree = "<group>";
 		};
 		C5E8B8E6979DE8BC218EFD55 /* Pods */ = {
@@ -379,7 +366,6 @@
 				5FB8741F1B48F7F1008A3940 /* MCFireworksView.m in Sources */,
 				5F405E661B4430E100D3176B /* main.m in Sources */,
 				5FB8741C1B483B82008A3940 /* MultiplePulsingHaloLayer.m in Sources */,
-				5FB8742D1B494677008A3940 /* HttpHelper.m in Sources */,
 				5FB874271B4921AB008A3940 /* KYBubbleTransition.m in Sources */,
 				5FB874181B480812008A3940 /* PulsingHaloLayer.m in Sources */,
 				5FB874111B47EF74008A3940 /* WaveLayer.m in Sources */,

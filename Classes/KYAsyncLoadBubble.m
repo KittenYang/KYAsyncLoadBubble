@@ -15,10 +15,12 @@
 #import "WaveLayer.h"
 #import "MultiplePulsingHaloLayer.h"
 #import "MCFireworksView.h"
+#import "AFHTTPRequestOperation.h"
 
 @interface KYAsyncLoadBubble()
 
 @property(nonatomic,weak)UIView *spView;
+@property(copy,nonatomic)NSString *webContent;
 
 @end
 
@@ -29,6 +31,7 @@
     MCFireworksView *fireworkView;
     WaveLayer *waveLayer;
     UILabel *bubbleLabel;
+    AFHTTPRequestOperation *operation;
 }
 
 
@@ -50,16 +53,19 @@
 #pragma mark -- PUBLIC METHOD
 -(void)setProgress:(CGFloat)progress{
     
-    NSLog(@"progress:%f",progress);
+//    NSLog(@"progress:%f",progress);
     waveLayer.progress = 1.0 - progress;
     bubbleLabel.center = CGPointMake(RADIUS/2,RADIUS/4 + progress * (RADIUS/4));
     if (progress >= 0.73f && progress != 1.0f) {
+        
         bubbleLabel.text = @"即将完成";
         bubbleLabel.font = [UIFont systemFontOfSize:10.0f];
         bubbleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         bubbleLabel.textColor = [UIColor whiteColor];
         [self bringSubviewToFront:bubbleLabel];
+        
     }else if (progress == 1.0f){
+        
         bubbleLabel.text = @"完成";
         bubbleLabel.font = [UIFont systemFontOfSize:13.0f];
         bubbleLabel.lineBreakMode = NSLineBreakByWordWrapping;
@@ -79,19 +85,15 @@
 #pragma mark -- OVERRIDE METHOD
 -(void)willMoveToSuperview:(UIView *)newSuperview{
     
-    //jump from bottom
+    self.spView = newSuperview;
+    
+    //self
     self.backgroundColor = [UIColor whiteColor];
     self.layer.cornerRadius = RADIUS/2;
     self.layer.masksToBounds = YES;
     self.center = CGPointMake(SCREENWIDTH/2, SCREENHEIGHT + RADIUS);
-    [UIView animateWithDuration:0.6 delay:1.0 usingSpringWithDamping:0.6f initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    self.bounds = CGRectMake(0, 0, RADIUS, RADIUS);
 
-        self.frame = CGRectMake(SCREENWIDTH-RADIUS, 100, RADIUS, RADIUS);
-        
-    } completion:^(BOOL finished) {
-        
-    }];
-    
     //label
     if (bubbleLabel == nil) {
         bubbleLabel= [[UILabel alloc]init];
@@ -104,8 +106,7 @@
         bubbleLabel.textColor = self.bubbleColor;
         [self addSubview:bubbleLabel];
     }
-    
-    
+
     //start wave
     if (waveLayer == nil) {
         waveLayer = [WaveLayer layer];
@@ -117,9 +118,41 @@
         [self.layer addSublayer:waveLayer];
     }
 
+    //jump from bottom
+    [UIView animateWithDuration:0.6 delay:1.0 usingSpringWithDamping:0.6f initialSpringVelocity:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+
+        self.frame = CGRectMake(SCREENWIDTH-RADIUS, 100, RADIUS, RADIUS);
+        
+    } completion:^(BOOL finished) {
+        
+        //异步请求网页内容
+        NSURLRequest  *request=[[NSURLRequest alloc]initWithURL:[NSURL URLWithString:self.webUrl]];
+        
+        operation = [[AFHTTPRequestOperation alloc]initWithRequest:request];
+        __weak __typeof__(self) weakSelf = self;
+        
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead)
+         {
+             NSLog(@"下载中...");
+             float progress = (float)bytesRead / totalBytesRead;
+             weakSelf.progress = progress;
+         }];
+        
+        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject)
+         {
+             NSString *content=[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding];
+             weakSelf.webContent=content;
+             weakSelf.progress = 1.0;
+             NSLog(@"下载成功");
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             
+             NSLog(@"下载失败");
+         }];
+        [operation start];
+        
+    }];
     
-    
-    self.spView = newSuperview;
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragBubble:)];
     [self addGestureRecognizer:pan];
@@ -134,8 +167,9 @@
 
 -(void)tapBubble:(UITapGestureRecognizer *)tapGes{
     
-    if ([self.delegate respondsToSelector:@selector(bubbleDidTapped)]) {
-        [self.delegate bubbleDidTapped];
+    if ([self.delegate respondsToSelector:@selector(bubbleDidTapped:)]) {
+
+        [self.delegate bubbleDidTapped:_webContent];
     }
     
 }
@@ -221,8 +255,8 @@
         if (CGRectContainsPoint(closeArea.frame,currentPoint)) {
             fireworkView = [[MCFireworksView alloc]initWithFrame:closeArea.frame];
             fireworkView.particleImage = [self getCurrentCGImageRefOfView:closeArea];
-            fireworkView.particleScale = 0.05;
-            fireworkView.particleScaleRange = 0.02;
+            fireworkView.particleScale = 0.04;
+            fireworkView.particleScaleRange = 0.01;
             [self.spView addSubview:fireworkView];
             [fireworkView animate];
             

@@ -46,7 +46,7 @@
 
     waterWaveHeight = progress * self.frame.size.height;
     if (progress == 0.0f) {
-        [self stop];
+//        [self stop];
     }else{
         [self wave];
     }

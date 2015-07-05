@@ -28,14 +28,14 @@
     return self;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     _webView.scalesPageToFit = YES;
-    NSURL *url = [NSURL URLWithString:URL];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [_webView loadRequest:request];
+    
+    [_webView loadHTMLString:self.webContent baseURL:[NSURL URLWithString:URL]];
 
-    self.title  =@"载入中...";
+    self.title = @"载入中...";
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;//显示状态栏的loading图标
 
 }
@@ -45,6 +45,27 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)goForward:(id)sender {
+    
+    if ([_webView canGoForward]) {
+        [_webView goForward];
+    }
+}
+- (IBAction)goBack:(id)sender {
+    
+    if ([_webView canGoBack]) {
+        [_webView goBack];
+    }
+}
+- (IBAction)stopLoading:(id)sender {
+    
+    [_webView stopLoading];
+
+}
+- (IBAction)refresh:(id)sender {
+    
+        [_webView reload];
+}
 
 #pragma mark - UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView{
