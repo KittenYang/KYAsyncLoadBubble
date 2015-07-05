@@ -6,6 +6,11 @@
 ![License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![Platform](https://img.shields.io/badge/platform-iOS-red.svg)
 
+<p align="left" >
+  <img src="asyncloadbubble.gif" alt="asyncloadbubble" title="asyncloadbubble" width = "320">
+</p>
+
+
 ##Intro
 
 A bubble which can async-load web content without interrupt your current process.
