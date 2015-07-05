@@ -50,7 +50,7 @@
     _bubble.progress = 0.0;
     _bubble.bubbleText = @"网页";
     _bubble.delegate = self;
-    _bubble.webUrl = @"http://blog.sunnyxx.com/2015/07/04/ios-interview/";
+    _bubble.webUrl = @"http://kittenyang.com/deformationandgooey/";
     [self.view addSubview:_bubble];
         
 }
