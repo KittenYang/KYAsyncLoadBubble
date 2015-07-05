@@ -119,14 +119,26 @@
 
     
     
-    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragBubble:)];
     self.spView = newSuperview;
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(dragBubble:)];
     [self addGestureRecognizer:pan];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapBubble:)];
+    [self addGestureRecognizer:tap];
     
 }
 
 
 #pragma mark -- PRIVATE METHOD
+
+-(void)tapBubble:(UITapGestureRecognizer *)tapGes{
+    
+    if ([self.delegate respondsToSelector:@selector(bubbleDidTapped)]) {
+        [self.delegate bubbleDidTapped];
+    }
+    
+}
 
 -(void)dragBubble:(UIPanGestureRecognizer *)panGes{
     

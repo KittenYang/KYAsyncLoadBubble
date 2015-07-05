@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol TapBubbleDelegate <NSObject>
+
+/**
+ *  bubble tapped protocol method
+ */
+-(void)bubbleDidTapped;
+
+@end
 
 @interface KYAsyncLoadBubble : UIView
 
@@ -27,5 +35,11 @@
  *  The string shows on the bubble 显示的文字
  */
 @property (nonatomic,strong)NSString *bubbleText;
+
+
+/**
+ *  Delegate
+ */
+@property (nonatomic,weak)id <TapBubbleDelegate> delegate;
 
 @end
