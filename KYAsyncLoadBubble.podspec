@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.summary      = "A floating bubble which ca async-load web content"
 
   s.description  = <<-DESC
-                   后台加载网页悬浮球
+                   A floating bubble which ca async-load web content. 后台加载网页悬浮球
                    DESC
 
   s.homepage     = "https://github.com/KittenYang/KYAsyncLoadBubble"
