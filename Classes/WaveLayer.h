@@ -33,7 +33,9 @@
 -(void) wave;
 
 
-
-
+/**
+ *  Stop waving
+ */
+-(void) stop;
 
 @end

@@ -17,11 +17,11 @@
 @property(nonatomic,strong)UIColor *bubbleColor;
 
 
-
 /**
  *  The progress of downloading,between 0~1 下载的进度
  */
 @property (nonatomic,assign)CGFloat progress;
+
 
 /**
  *  The string shows on the bubble 显示的文字

@@ -37,7 +37,7 @@
 
 -(void)setFrame:(CGRect)frame{
     [super setFrame:frame];
-    waterWaveHeight = frame.size.height / 2;
+    waterWaveHeight = frame.size.height;
     waterWaveWidth  = frame.size.width;
 
 }
@@ -46,8 +46,7 @@
 
     waterWaveHeight = progress * self.frame.size.height;
     if (progress == 0.0f) {
-        [self.displayLink invalidate];
-        self.displayLink = nil;
+        [self stop];
     }else{
         [self wave];
     }
@@ -66,6 +65,13 @@
         self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(getCurrentWave:)];
         [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
+}
+
+-(void)stop{
+    
+    [self.displayLink invalidate];
+    self.displayLink = nil;
+
 }
 
 -(void)getCurrentWave:(CADisplayLink *)displayLink{

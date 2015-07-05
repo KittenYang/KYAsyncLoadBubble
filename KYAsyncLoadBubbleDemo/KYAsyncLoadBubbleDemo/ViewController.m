@@ -21,13 +21,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _bubble = [KYAsyncLoadBubble new];
-    _bubble.bubbleColor = [UIColor colorWithRed:0.0 green:0.487 blue:1.0 alpha:1.0];
-    _bubble.progress = 0.3;
-    _bubble.bubbleText = @"网页";
-    [self.view addSubview:_bubble];
-    
-    
     
     [self.progressSlider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
 
@@ -38,6 +31,20 @@
     
 }
 
+- (IBAction)addBubble:(id)sender {
+
+    
+    for (UIView *subview in self.view.subviews) {
+        if ([subview isKindOfClass:[KYAsyncLoadBubble class]]) {
+            return;
+        }
+    }
+    _bubble = [KYAsyncLoadBubble new];
+    _bubble.bubbleColor = [UIColor colorWithRed:0.0 green:0.487 blue:1.0 alpha:1.0];
+    _bubble.progress = 0.0;
+    _bubble.bubbleText = @"网页";
+    [self.view addSubview:_bubble];    
+}
 
 
 - (void)didReceiveMemoryWarning {

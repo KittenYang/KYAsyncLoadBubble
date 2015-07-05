@@ -18,6 +18,7 @@
 		5FB874111B47EF74008A3940 /* WaveLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874101B47EF74008A3940 /* WaveLayer.m */; };
 		5FB874181B480812008A3940 /* PulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB874171B480812008A3940 /* PulsingHaloLayer.m */; };
 		5FB8741C1B483B82008A3940 /* MultiplePulsingHaloLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8741B1B483B82008A3940 /* MultiplePulsingHaloLayer.m */; };
+		5FB8741F1B48F7F1008A3940 /* MCFireworksView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5FB8741E1B48F7F1008A3940 /* MCFireworksView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,8 @@
 		5FB874171B480812008A3940 /* PulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PulsingHaloLayer.m; path = ../../Classes/PulsingHaloLayer.m; sourceTree = "<group>"; };
 		5FB8741A1B483B82008A3940 /* MultiplePulsingHaloLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MultiplePulsingHaloLayer.h; path = ../../Classes/MultiplePulsingHaloLayer.h; sourceTree = "<group>"; };
 		5FB8741B1B483B82008A3940 /* MultiplePulsingHaloLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MultiplePulsingHaloLayer.m; path = ../../Classes/MultiplePulsingHaloLayer.m; sourceTree = "<group>"; };
+		5FB8741D1B48F7F1008A3940 /* MCFireworksView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCFireworksView.h; path = ../../Classes/MCFireworksView.h; sourceTree = "<group>"; };
+		5FB8741E1B48F7F1008A3940 /* MCFireworksView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCFireworksView.m; path = ../../Classes/MCFireworksView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +142,7 @@
 				5F405E8A1B44341300D3176B /* KYAsyncLoadBubble.m */,
 				5FB874191B48082A008A3940 /* PulseLayer */,
 				5FB874121B47EF7B008A3940 /* WaveLayer */,
+				5FB874201B48F7FC008A3940 /* FireworksView */,
 			);
 			name = KYAsyncLoadBubble;
 			sourceTree = "<group>";
@@ -161,6 +165,15 @@
 				5FB874171B480812008A3940 /* PulsingHaloLayer.m */,
 			);
 			name = PulseLayer;
+			sourceTree = "<group>";
+		};
+		5FB874201B48F7FC008A3940 /* FireworksView */ = {
+			isa = PBXGroup;
+			children = (
+				5FB8741D1B48F7F1008A3940 /* MCFireworksView.h */,
+				5FB8741E1B48F7F1008A3940 /* MCFireworksView.m */,
+			);
+			name = FireworksView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +279,7 @@
 				5F405E8B1B44341300D3176B /* KYAsyncLoadBubble.m in Sources */,
 				5F405E6C1B4430E100D3176B /* ViewController.m in Sources */,
 				5F405E691B4430E100D3176B /* AppDelegate.m in Sources */,
+				5FB8741F1B48F7F1008A3940 /* MCFireworksView.m in Sources */,
 				5F405E661B4430E100D3176B /* main.m in Sources */,
 				5FB8741C1B483B82008A3940 /* MultiplePulsingHaloLayer.m in Sources */,
 				5FB874181B480812008A3940 /* PulsingHaloLayer.m in Sources */,

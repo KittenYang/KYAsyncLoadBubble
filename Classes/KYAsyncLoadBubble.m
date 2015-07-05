@@ -14,6 +14,7 @@
 #import "KYAsyncLoadBubble.h"
 #import "WaveLayer.h"
 #import "MultiplePulsingHaloLayer.h"
+#import "MCFireworksView.h"
 
 @interface KYAsyncLoadBubble()
 
@@ -25,6 +26,7 @@
     
     UIView *closeArea;
     MultiplePulsingHaloLayer *pulseLayer;
+    MCFireworksView *fireworkView;
     WaveLayer *waveLayer;
     UILabel *bubbleLabel;
 }
@@ -198,12 +200,35 @@
         
     }else if (panGes.state == UIGestureRecognizerStateEnded || panGes.state == UIGestureRecognizerStateCancelled){
         
+        
         [pulseLayer stopPulse];
         pulseLayer  = nil;
-
         destinationPoint = [self destinationPoint:currentPoint];
+        
+        
+        if (CGRectContainsPoint(closeArea.frame,currentPoint)) {
+            fireworkView = [[MCFireworksView alloc]initWithFrame:closeArea.frame];
+            fireworkView.particleImage = [self getCurrentCGImageRefOfView:closeArea];
+            fireworkView.particleScale = 0.05;
+            fireworkView.particleScaleRange = 0.02;
+            [self.spView addSubview:fireworkView];
+            [fireworkView animate];
+            
+            [self removeFromSuperview];
+            [waveLayer stop];
+            
+        }else{
+            
+            [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
+                
+                self.center = destinationPoint;
+                
+            } completion:nil];
+        
+        }
+    
         [UIView animateWithDuration:0.2 animations:^{
-
+            
             closeArea.transform = CGAffineTransformMakeScale(0.1, 0.1);
             
         } completion:^(BOOL finished) {
@@ -211,19 +236,33 @@
             closeArea = nil;
         }];
         
-        [UIView animateWithDuration:0.4 delay:0.0 usingSpringWithDamping:0.6 initialSpringVelocity:0.0 options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState animations:^{
-            
-            self.center = destinationPoint;
-            
-        } completion:nil];
-        
     }
-
     
 }
 
 
+-(void)dealloc{
+    closeArea = nil;
+    pulseLayer = nil;
+    waveLayer = nil;
+    bubbleLabel = nil;
+    fireworkView = nil;
+}
+
+
 #pragma mark -- Helper Method
+
+-(UIImage *)getCurrentCGImageRefOfView:(UIView *)view{
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, view.opaque, view.contentScaleFactor);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [view.layer renderInContext:context];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    // Convert UIImage to CGImage
+//    CGImageRef cgImage = image.CGImage;
+    return image;
+}
 
 //判断属于哪一个象限
 -(NSInteger)pointBelongsWhichPart:(CGPoint)point{
