@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "KYAsyncLoadBubble"
-  s.version      = "1.0.0"
+  s.version      = "1.0.2"
   s.summary      = "A floating bubble which ca async-load web content"
 
   s.description  = <<-DESC
