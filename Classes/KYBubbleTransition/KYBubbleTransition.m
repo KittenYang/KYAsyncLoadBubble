@@ -73,12 +73,13 @@
         
         [UIView animateWithDuration:self.duration animations:^{
             _bubble.transform = CGAffineTransformIdentity;
+            _bubble.backgroundColor = [UIColor whiteColor];
             toView.transform = CGAffineTransformIdentity;
             toView.alpha =  1.0f;
             toView.center = originalCenter;
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                _bubble.alpha = 0.0;
+//                _bubble.alpha = 0.0;
             }completion:^(BOOL finished) {
                 [_bubble removeFromSuperview];
                 [transitionContext completeTransition:YES];
