@@ -68,18 +68,18 @@
         toView.alpha = 0.0;
         _bubble.alpha = 1.0;
         
-        [containerView addSubview:_bubble];
         [containerView addSubview:toView];
+        [containerView addSubview:_bubble];
         
         [UIView animateWithDuration:self.duration animations:^{
             _bubble.transform = CGAffineTransformIdentity;
-            _bubble.backgroundColor = [UIColor whiteColor];
+//            _bubble.backgroundColor = [UIColor whiteColor];
             toView.transform = CGAffineTransformIdentity;
             toView.alpha =  1.0f;
             toView.center = originalCenter;
         } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-//                _bubble.alpha = 0.0;
+            [UIView animateWithDuration:0.1 animations:^{
+                _bubble.alpha = 0.0;
             }completion:^(BOOL finished) {
                 [_bubble removeFromSuperview];
                 [transitionContext completeTransition:YES];
