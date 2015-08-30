@@ -18,10 +18,35 @@ typedef enum BubbleTranisionMode{
 @interface KYBubbleTransition : NSObject<UIViewControllerAnimatedTransitioning>
 
 
-
+/*
+ *动画执行的时间
+ */
 @property(nonatomic,assign)CGFloat duration;
+
+
+/*
+ *圆心位置
+ */
 @property(nonatomic,assign)CGPoint startPoint;
-@property(nonatomic,assign)BubbleTranisionMode transitionMode;
+
+
+/*
+ *颜色
+ */
 @property(nonatomic,strong)UIColor *bubbleColor;
 
+
+/*
+ *转场类型
+ */
+@property(nonatomic,assign)BubbleTranisionMode transitionMode;
+
+
+
+
+
 @end
+
+
+
+
